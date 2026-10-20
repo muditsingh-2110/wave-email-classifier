@@ -10,8 +10,8 @@ info:
     and routing team are also returned.
 
 servers:
-  - url: https://YOUR-NGROK-URL.ngrok-free.app
-    description: Local dev server exposed via ngrok (replace with your ngrok URL)
+  - url: https://wave-email-classifier.onrender.com
+    description: Live production server hosted on Render
 
 paths:
 
