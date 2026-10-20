@@ -1,0 +1,246 @@
+openapi: 3.0.0
+
+info:
+  title: Wave Email Classifier API
+  version: "1.0.0"
+  description: >
+    Classifies customer emails for UCHDPL Wave CRM.
+    Each email is categorised as SERVICE_REQUEST, COMPLAINT, or GENERAL_QUERY.
+    Sentiment (POSITIVE / NEUTRAL / NEGATIVE), priority (HIGH / MEDIUM / LOW),
+    and routing team are also returned.
+
+servers:
+  - url: https://YOUR-NGROK-URL.ngrok-free.app
+    description: Local dev server exposed via ngrok (replace with your ngrok URL)
+
+paths:
+
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Check if the API is running
+      description: Returns a simple OK response. Use this to verify the service is up.
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: Wave Email Classifier
+
+  /classify:
+    post:
+      operationId: classifySingleEmail
+      summary: Classify one customer email
+      description: >
+        Send a single customer email (id, from, subject, body) and receive
+        the category, sentiment, priority, routing team, and a one-line summary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailInput"
+            example:
+              id: "EMAIL-001"
+              from: "rajesh.sharma@gmail.com"
+              subject: "Lift not working in Tower B since 3 days"
+              body: "Hi, I am a resident of Tower B, Flat 1204. The lift has not been working for 3 days..."
+      responses:
+        "200":
+          description: Classification result for the email
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationResult"
+        "400":
+          description: Missing or invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /classify/batch:
+    post:
+      operationId: classifyBatchEmails
+      summary: Classify multiple customer emails at once
+      description: >
+        Send an array of emails and receive classification results for all of them,
+        plus a summary count by category. This is the main tool for bulk processing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emails
+              properties:
+                emails:
+                  type: array
+                  description: List of emails to classify
+                  items:
+                    $ref: "#/components/schemas/EmailInput"
+            example:
+              emails:
+                - id: "E1"
+                  from: "customer1@gmail.com"
+                  subject: "Water leakage in flat"
+                  body: "There is severe water leakage from the roof of my flat."
+                - id: "E2"
+                  from: "customer2@gmail.com"
+                  subject: "Price of 2BHK"
+                  body: "Can you please share the price and floor plans for 2BHK?"
+      responses:
+        "200":
+          description: Classification results for all emails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of emails processed
+                    example: 2
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ClassificationResult"
+                  summary:
+                    type: object
+                    description: Count of emails per category
+                    properties:
+                      COMPLAINT:
+                        type: integer
+                        example: 1
+                      SERVICE_REQUEST:
+                        type: integer
+                        example: 1
+                      GENERAL_QUERY:
+                        type: integer
+                        example: 0
+        "400":
+          description: Missing or invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /classify/demo:
+    get:
+      operationId: classifyDemoEmails
+      summary: Run classification on the 10 built-in dummy emails
+      description: >
+        No input needed. Runs the classifier on the 10 pre-loaded dummy CRM emails
+        and returns all results. Good for testing the tool in Orchestrate.
+      responses:
+        "200":
+          description: Classification results for all 10 demo emails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    example: 10
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ClassificationResult"
+                  summary:
+                    type: object
+                    properties:
+                      COMPLAINT:
+                        type: integer
+                        example: 3
+                      SERVICE_REQUEST:
+                        type: integer
+                        example: 3
+                      GENERAL_QUERY:
+                        type: integer
+                        example: 4
+
+
+components:
+  schemas:
+
+    EmailInput:
+      type: object
+      required:
+        - id
+        - from
+        - subject
+        - body
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the email
+          example: EMAIL-001
+        from:
+          type: string
+          description: Sender email address
+          example: rajesh.sharma@gmail.com
+        subject:
+          type: string
+          description: Email subject line
+          example: Lift not working in Tower B since 3 days
+        body:
+          type: string
+          description: Full email body text
+          example: Hi, I am a resident of Tower B, Flat 1204. The lift has not been working for 3 days...
+
+    ClassificationResult:
+      type: object
+      properties:
+        email_id:
+          type: string
+          description: The ID of the email that was classified
+          example: EMAIL-001
+        from:
+          type: string
+          description: Sender email address
+          example: rajesh.sharma@gmail.com
+        subject:
+          type: string
+          description: Email subject
+          example: Lift not working in Tower B since 3 days
+        category:
+          type: string
+          description: Classification category
+          enum: [SERVICE_REQUEST, COMPLAINT, GENERAL_QUERY]
+          example: SERVICE_REQUEST
+        sentiment:
+          type: string
+          description: Detected sentiment of the email
+          enum: [POSITIVE, NEUTRAL, NEGATIVE]
+          example: NEGATIVE
+        priority:
+          type: string
+          description: Priority level for handling
+          enum: [HIGH, MEDIUM, LOW]
+          example: HIGH
+        route_to:
+          type: string
+          description: The team this email should be routed to
+          example: Facilities / Project Team
+        summary:
+          type: string
+          description: One-line summary of the email content
+          example: Hi, I am a resident of Tower B, Flat 1204
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong
+          example: "'emails' array is required"

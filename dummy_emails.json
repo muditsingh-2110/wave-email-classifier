@@ -1,0 +1,62 @@
+[
+  {
+    "id": "EMAIL-001",
+    "from": "rajesh.sharma@gmail.com",
+    "subject": "Lift not working in Tower B since 3 days",
+    "body": "Hi, I am a resident of Tower B, Flat 1204. The lift has not been working for the past 3 days. I have small children and elderly parents at home. This is causing a lot of difficulty. Please send a technician immediately. This is urgent."
+  },
+  {
+    "id": "EMAIL-002",
+    "from": "priya.mehta@yahoo.com",
+    "subject": "What is the price of 3BHK in Wave City?",
+    "body": "Hello, I am interested in purchasing a 3BHK apartment in Wave City. Can you please share the current pricing, floor plans, and available inventory? Also what are the payment plan options? Looking forward to your response."
+  },
+  {
+    "id": "EMAIL-003",
+    "from": "ankit.verma@outlook.com",
+    "subject": "FRAUD! My booking amount not refunded for 6 months!",
+    "body": "I cancelled my booking in March and I was promised a refund within 60 days. It has now been 6 months and despite calling 10 times no one is helping me. This is cheating. I will be filing a complaint with RERA and consumer court if I do not receive my refund in 7 days. Booking ref: WC-2024-4521."
+  },
+  {
+    "id": "EMAIL-004",
+    "from": "sunita.kapoor@gmail.com",
+    "subject": "Water leakage in my flat roof - urgent",
+    "body": "Dear team, there is severe water leakage from the roof of my flat (Tower A, Flat 802) every time it rains. The ceiling has developed cracks and my furniture is getting damaged. I have been raising this for 2 months with no resolution. Please treat this as urgent and send a repair team."
+  },
+  {
+    "id": "EMAIL-005",
+    "from": "mohit.agarwal@gmail.com",
+    "subject": "Request for possession date confirmation",
+    "body": "Hi, I booked a 2BHK flat (Unit 3rd Floor, Tower C) in 2022. As per the original schedule possession was due in Q3 2024. Can you please confirm the expected possession date? I need to plan my home loan disbursement accordingly. Please reply at the earliest."
+  },
+  {
+    "id": "EMAIL-006",
+    "from": "deepak.joshi@rediffmail.com",
+    "subject": "Terrible experience - sales executive rude behaviour",
+    "body": "I visited your site office last Saturday and the sales executive Mr. Rohit was extremely rude and dismissive. He did not take our query seriously and asked us to leave. This is not acceptable behaviour from a company of your stature. I am raising a formal complaint and expect a written apology."
+  },
+  {
+    "id": "EMAIL-007",
+    "from": "neha.singh@gmail.com",
+    "subject": "Need NOC for home loan - urgent",
+    "body": "Hello, I have applied for a home loan from SBI and the bank requires a No Objection Certificate from the developer. My unit is Wave City Tower D, Flat 2104. Could you please issue the NOC at the earliest? The loan processing is on hold because of this. My booking reference is WC-2023-7823."
+  },
+  {
+    "id": "EMAIL-008",
+    "from": "vikram.nair@gmail.com",
+    "subject": "Parking slot not allotted even after 1 year",
+    "body": "I purchased my flat in Tower B in 2023 and the parking slot was supposed to be allotted within 3 months as per the sale agreement. It has now been over a year and no parking has been assigned. I am parking on the road which is very inconvenient and also causing damage to my car. Please resolve this immediately."
+  },
+  {
+    "id": "EMAIL-009",
+    "from": "kavita.reddy@gmail.com",
+    "subject": "When will the clubhouse be ready?",
+    "body": "Hi team, I just wanted to check on the status of the clubhouse amenity. We were told it would be operational by mid-2024. We are already in October and there is no sign of it. Can you share an updated timeline? Also when will the swimming pool be functional? Thanks."
+  },
+  {
+    "id": "EMAIL-010",
+    "from": "suresh.patel@hotmail.com",
+    "subject": "Overcharged on maintenance fees - need explanation",
+    "body": "I received the quarterly maintenance bill and it is Rs.8,500 whereas my neighbour in the same wing is paying Rs.6,200. There is no explanation for this difference. I am not paying the excess amount until I receive a detailed breakup and justification. Please look into this billing discrepancy urgently."
+  }
+]

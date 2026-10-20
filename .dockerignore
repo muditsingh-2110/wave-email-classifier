@@ -1,0 +1,12 @@
+# Ignore these when building the Docker image
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+*.log
+classification_results.json
+README.md
+.dockerignore
